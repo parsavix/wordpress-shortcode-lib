@@ -72,11 +72,29 @@ abstract class Shortcode
             throw new DuplicateShortcodeException();
         }
 
+        self::setupInWp($shortcode);
+        self::setupInWpbakery($shortcode);
+    }
+
+    public static function setupInWp(Shortcode $shortcode)
+    {
         add_shortcode($shortcode->getTag(), function () use ($shortcode) {
             ob_start();
             $shortcode->render();
             return ob_get_clean();
         });
+    }
+
+    public static function setupInWpbakery(Shortcode $shortcode)
+    {
+        if (!defined('WPB_VC_VERSION')) {
+            return;
+        }
+
+        vc_map([
+            'base' => $shortcode->tag,
+            'name' => $shortcode->name
+        ]);
     }
 
     /**
