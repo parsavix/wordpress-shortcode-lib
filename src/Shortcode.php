@@ -2,7 +2,10 @@
 
 namespace Parsavix\WordPress;
 
-class Shortcode
+use Parsavix\Exceptions\RequiredPropertyException;
+use Parsavix\WordPress\Shortcodes\DuplicateShortcodeException;
+
+abstract class Shortcode
 {
     /**
      * Tag name, e.g. '[my-shortcode]'
@@ -28,7 +31,7 @@ class Shortcode
     }
 
     /**
-     * Used to shortcode properties in subclasses.
+     * Used to set shortcode properties in subclasses.
      *
      * @return void
      */
@@ -43,11 +46,11 @@ class Shortcode
     protected function validate()
     {
         if (empty($this->tag)) {
-            throw new \Exception('Setting a value for "tag" property is required.');
+            throw new RequiredPropertyException('tag');
         }
 
         if (empty($this->name)) {
-            throw new \Exception('Setting a value for "name" property is required.');
+            throw new RequiredPropertyException('name');
         }
     }
 
@@ -56,5 +59,43 @@ class Shortcode
      *
      * @return void
      */
-    abstract protected function render();
+    abstract public function render();
+
+    /**
+     * Registers a shortcode in WordPress.
+     *
+     * @return void
+     */
+    public static function setupShortcode(Shortcode $shortcode)
+    {
+        if (shortcode_exists($shortcode->getTag())) {
+            throw new DuplicateShortcodeException();
+        }
+
+        add_shortcode($shortcode->getTag(), function () use ($shortcode) {
+            ob_start();
+            $shortcode->render();
+            return ob_get_clean();
+        });
+    }
+
+    /**
+     * Registers a shortcode in WordPress.
+     *
+     * @return void
+     */
+    public function setup()
+    {
+        self::setupShortcode($this);
+    }
+
+    /**
+     * Returns shortcode tag.
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
 }
