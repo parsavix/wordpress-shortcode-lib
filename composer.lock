@@ -4,24 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d17190ef6b95e497078890049f8156f",
+    "content-hash": "eaa94dc890ee7b37da4c774624bfcbd4",
     "packages": [
         {
             "name": "parsavix/php-lib",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parsavix/php-lib.git",
-                "reference": "59737b859e8011f181b3dec8730fd99044ea3475"
+                "reference": "63d53971b2118c5b5d23203a51663cb44c1933f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parsavix/php-lib/zipball/59737b859e8011f181b3dec8730fd99044ea3475",
-                "reference": "59737b859e8011f181b3dec8730fd99044ea3475",
+                "url": "https://api.github.com/repos/parsavix/php-lib/zipball/63d53971b2118c5b5d23203a51663cb44c1933f8",
+                "reference": "63d53971b2118c5b5d23203a51663cb44c1933f8",
                 "shasum": ""
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.0"
+                "phpunit/phpunit": "^9.0",
+                "symfony/var-dumper": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -39,7 +40,7 @@
                     "email": "60689746+parsavix@users.noreply.github.com"
                 }
             ],
-            "time": "2020-02-09T09:41:36+00:00"
+            "time": "2020-02-09T15:33:40+00:00"
         }
     ],
     "packages-dev": [
