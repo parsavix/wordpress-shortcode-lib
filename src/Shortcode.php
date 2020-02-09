@@ -59,7 +59,7 @@ abstract class Shortcode
      *
      * @return void
      */
-    abstract public function render();
+    abstract protected function render();
 
     /**
      * Registers a shortcode in WordPress.
