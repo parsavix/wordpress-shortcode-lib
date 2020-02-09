@@ -24,7 +24,7 @@ require_once $_tests_dir . '/includes/functions.php';
  */
 function _manually_load_plugin()
 {
-    $pluginsPath = dirname(dirname(dirname(__FILE__))) . '/.plugins';
+    $pluginsPath = __DIR__ . '/.plugins';
 
     require $pluginsPath . '/js_composer/js_composer.php';
 }
